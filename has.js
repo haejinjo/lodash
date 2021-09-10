@@ -14,14 +14,21 @@ const hasOwnProperty = Object.prototype.hasOwnProperty
  *
  * const object = { 'a': { 'b': 2 } }
  * const other = create({ 'a': create({ 'b': 2 }) })
+ * const emptyObject = {}
  *
  * has(object, 'a')
  * // => true
  *
  * has(other, 'a')
  * // => false
+ *
+ * has(emptyObject)
+ * // => false
  */
 function has(object, key) {
+  if (key === undefined || key === null) {
+    return Object.entries(object).length !== 0;
+  }
   return object != null && hasOwnProperty.call(object, key)
 }
 
